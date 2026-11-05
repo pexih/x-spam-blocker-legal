@@ -82,13 +82,14 @@
   <p>以上数据<strong>不会</strong>离开你的设备。扩展不使用 <code>storage.sync</code>，因此也不会同步到你的 Google 账号。</p>
 
   <h2>2. 网络请求</h2>
-  <p>扩展只与 <code>x.com</code> / <code>twitter.com</code> 通信，且都用你自己已登录的会话：</p>
+  <p>扩展只与 X 平台自身的域名通信 —— <code>x.com</code> / <code>twitter.com</code>，
+  以及 X 用来分发前端脚本的静态资源域名 <code>abs.twimg.com</code>；全部使用你自己已登录的会话：</p>
   <ul>
     <li>查询账号公开资料（与你在 X 上悬停查看名片时发出的请求同类）；</li>
     <li>执行拉黑操作——<strong>仅在你设定的规则和节奏下自动执行，或你手动点击时执行</strong>。</li>
   </ul>
   <p>不存在开发者服务器、中转服务或第三方 API。扩展不会把你的浏览记录、账号信息、
-  规则配置或统计结果发送到 x.com 之外的任何地方。</p>
+  规则配置或统计结果发送到 X 平台之外的任何地方。</p>
 
   <h2>3. Cookie</h2>
   <p>扩展申请了 <code>cookies</code> 权限，但只读取 <code>x.com</code> 下的一个 cookie：<code>ct0</code>。
@@ -155,9 +156,10 @@
     <code>storage.sync</code> and never transmits this data anywhere.</p>
 
     <h2>2. Network requests</h2>
-    <p>Requests go only to <code>x.com</code> / <code>twitter.com</code>, using your own signed-in
-    session: public profile lookups and block actions that you configured or clicked yourself.
-    There is no developer server, no relay and no third-party API.</p>
+    <p>Requests go only to X's own domains — <code>x.com</code> / <code>twitter.com</code>, plus
+    <code>abs.twimg.com</code>, the static-asset host X uses to serve its front-end scripts — and
+    always with your own signed-in session: public profile lookups and block actions that you
+    configured or clicked yourself. There is no developer server, no relay and no third-party API.</p>
 
     <h2>3. Cookies</h2>
     <p>The <code>cookies</code> permission is used to read exactly one cookie on <code>x.com</code>:
