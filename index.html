@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>隐私政策 · X（推特）垃圾账号清理器</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #5b6572;
+    --line: #e5e7eb; --accent: #14532d; --chip: #f3f4f6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d1117; --fg: #e6edf3; --muted: #9aa4b2; --line: #232c38; --accent: #7ee2a8; --chip: #161b22; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 40px 20px 72px;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Microsoft YaHei", sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 26px; line-height: 1.35; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin: 34px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); }
+  h2:first-of-type { border-top: 0; padding-top: 0; }
+  p, li { color: var(--fg); }
+  .sub { color: var(--muted); font-size: 13px; margin: 0 0 24px; }
+  .lede {
+    background: var(--chip); border-radius: 10px; padding: 14px 16px; margin: 20px 0 8px;
+    font-size: 14px;
+  }
+  ul { padding-left: 22px; }
+  li { margin: 5px 0; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; }
+  .en { margin-top: 56px; padding-top: 28px; border-top: 2px solid var(--line); }
+  .en h1 { font-size: 22px; }
+  footer { margin-top: 44px; color: var(--muted); font-size: 12.5px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>隐私政策 · X（推特）垃圾账号清理器</h1>
+  <p class="sub">最后更新：2026 年 11 月 5 日 · 适用版本：1.7.42 及以后</p>
+
+  <p class="lede">
+    <strong>一句话：</strong>这个扩展完全在你的浏览器里运行。它没有服务器、没有账号体系、
+    没有统计埋点，不会把你的任何数据发送给开发者或第三方。
+  </p>
+
+  <h2>1. 我们处理哪些数据，为什么</h2>
+  <p>扩展的唯一用途是帮你在 X（twitter.com / x.com）上隐藏并拉黑垃圾账号。为了做到这一点，
+  它会在你浏览时读取页面内容，并把你的配置保存在本地：</p>
+  <table>
+    <thead><tr><th>数据</th><th>用途</th><th>存放位置</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>你自己设置的规则（正文 / 昵称 / 简介关键词、豁免名单、执行节奏）</td>
+        <td>按你的要求判定哪些内容需要隐藏</td>
+        <td>本机 <code>chrome.storage.local</code></td>
+      </tr>
+      <tr>
+        <td>判定结果与待拉黑队列：账号名、显示名、简介片段、命中原因、时间</td>
+        <td>让你在弹窗里检查、修改、删除；决定是否执行拉黑</td>
+        <td>本机 <code>chrome.storage.local</code></td>
+      </tr>
+      <tr>
+        <td>账号公开资料缓存（关注数、粉丝数、创建日期等）</td>
+        <td>避免重复查询同一账号，减少请求</td>
+        <td>本机 <code>chrome.storage.local</code></td>
+      </tr>
+      <tr>
+        <td>运行统计（今日入池、今日已拉黑）</td>
+        <td>在弹窗里显示进度</td>
+        <td>本机 <code>chrome.storage.local</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>以上数据<strong>不会</strong>离开你的设备。扩展不使用 <code>storage.sync</code>，因此也不会同步到你的 Google 账号。</p>
+
+  <h2>2. 网络请求</h2>
+  <p>扩展只与 <code>x.com</code> / <code>twitter.com</code> 通信，且都用你自己已登录的会话：</p>
+  <ul>
+    <li>查询账号公开资料（与你在 X 上悬停查看名片时发出的请求同类）；</li>
+    <li>执行拉黑操作——<strong>仅在你设定的规则和节奏下自动执行，或你手动点击时执行</strong>。</li>
+  </ul>
+  <p>不存在开发者服务器、中转服务或第三方 API。扩展不会把你的浏览记录、账号信息、
+  规则配置或统计结果发送到 x.com 之外的任何地方。</p>
+
+  <h2>3. Cookie</h2>
+  <p>扩展申请了 <code>cookies</code> 权限，但只读取 <code>x.com</code> 下的一个 cookie：<code>ct0</code>。
+  它是 X 自己的 CSRF 校验令牌，调用 X 的拉黑接口时必须带上。这个值只用于构造请求头，
+  不写入、不修改、不存储、不上传。</p>
+
+  <h2>4. 我们不会做的事</h2>
+  <ul>
+    <li>不收集个人身份信息，不建立用户画像；</li>
+    <li>不出售、不出租、不共享任何数据；</li>
+    <li>不投放广告，不做行为分析，不使用任何第三方统计 SDK；</li>
+    <li>不加载远程代码——所有 JavaScript 都打包在安装包内。</li>
+  </ul>
+
+  <h2>5. 数据删除</h2>
+  <ul>
+    <li>在弹窗里可以逐条移除池内记录，或用「清空待处理」批量清理；</li>
+    <li>卸载扩展会由 Chrome 一并删除它在 <code>chrome.storage.local</code> 中的全部数据；</li>
+    <li>不需要联系我们删除数据——我们手上本来就没有你的数据。</li>
+  </ul>
+
+  <h2>6. 权限说明</h2>
+  <ul>
+    <li><code>storage</code>：保存上述本地配置与队列；</li>
+    <li><code>alarms</code>：按你设定的间隔触发批量拉黑；</li>
+    <li><code>cookies</code>：读取 x.com 的 <code>ct0</code> 令牌（见第 3 节）；</li>
+    <li>主机权限 <code>x.com</code> / <code>twitter.com</code>：扩展的全部功能都发生在 X 网页上，不申请其他站点。</li>
+  </ul>
+
+  <h2>7. 儿童</h2>
+  <p>本扩展不面向 13 岁以下儿童设计，也不会有意处理儿童的个人信息。</p>
+
+  <h2>8. 变更</h2>
+  <p>本政策如更新，会同步修改本页顶部的日期，并在扩展的更新说明中注明。</p>
+
+  <h2>9. 联系方式</h2>
+  <p>问题、疑问或投诉：请到 <a href="https://github.com/pexih/x-spam-blocker-legal/issues">github.com/pexih/x-spam-blocker-legal/issues</a> 提交 Issue，
+  这是本项目唯一的对外反馈渠道。</p>
+
+  <h2>10. 与 X Corp. 的关系</h2>
+  <p>本扩展是独立开发的第三方工具，与 X Corp. 没有任何关联，也未获得其背书或授权。
+  “X”仅用于说明适用的平台。</p>
+
+  <div class="en">
+    <h1>Privacy Policy · X (Twitter) Spam Account Cleaner</h1>
+    <p class="sub">Last updated: November 5, 2026 · Applies to version 1.7.42 and later</p>
+
+    <p class="lede">
+      <strong>In one sentence:</strong> this extension runs entirely in your browser. There is no
+      server, no account system and no analytics — none of your data is sent to the developer or
+      any third party.
+    </p>
+
+    <h2>1. What data is processed</h2>
+    <p>The extension's only purpose is to hide and block spam accounts on X. To do that it reads page
+    content while you browse and stores your configuration locally:</p>
+    <ul>
+      <li>Your rules: keywords, account-attribute rules, exemption list, execution pacing;</li>
+      <li>Detection results and the block queue: handles, display names, bio snippets, match reasons, timestamps;</li>
+      <li>Cached public profile fields (following/followers counts, creation date), to avoid repeated lookups;</li>
+      <li>Local counters (accounts added today, accounts blocked today).</li>
+    </ul>
+    <p>All of it lives in <code>chrome.storage.local</code> on your device. The extension does not use
+    <code>storage.sync</code> and never transmits this data anywhere.</p>
+
+    <h2>2. Network requests</h2>
+    <p>Requests go only to <code>x.com</code> / <code>twitter.com</code>, using your own signed-in
+    session: public profile lookups and block actions that you configured or clicked yourself.
+    There is no developer server, no relay and no third-party API.</p>
+
+    <h2>3. Cookies</h2>
+    <p>The <code>cookies</code> permission is used to read exactly one cookie on <code>x.com</code>:
+    <code>ct0</code>, X's own CSRF token, required as a request header when calling X's block endpoint.
+    It is never written, modified, stored or transmitted.</p>
+
+    <h2>4. What we never do</h2>
+    <ul>
+      <li>No personal data collection, no profiling;</li>
+      <li>No selling, renting or sharing of data;</li>
+      <li>No ads, no behavioural analytics, no third-party SDKs;</li>
+      <li>No remote code — all JavaScript ships inside the package.</li>
+    </ul>
+
+    <h2>5. Deleting data</h2>
+    <p>Remove individual entries or clear the queue from the popup. Uninstalling the extension makes
+    Chrome delete all of its <code>chrome.storage.local</code> data. You do not need to contact us —
+    we never had your data.</p>
+
+    <h2>6. Permissions</h2>
+    <p><code>storage</code> for local config and queue; <code>alarms</code> for scheduled batches;
+    <code>cookies</code> for the <code>ct0</code> token; host permissions limited to
+    <code>x.com</code> and <code>twitter.com</code>, where the entire feature set lives.</p>
+
+    <h2>7. Children</h2>
+    <p>Not directed to children under 13, and no personal data from children is knowingly processed.</p>
+
+    <h2>8. Changes</h2>
+    <p>If this policy changes, the date at the top is updated and the change is noted in the
+    extension's release notes.</p>
+
+    <h2>9. Contact</h2>
+    <p>Questions, concerns or complaints: please open an issue at
+    <a href="https://github.com/pexih/x-spam-blocker-legal/issues">github.com/pexih/x-spam-blocker-legal/issues</a>, the only public support channel
+    for this project.</p>
+
+    <h2>10. Affiliation</h2>
+    <p>This is an independent third-party tool. It is not affiliated with, endorsed by, or sponsored
+    by X Corp. "X" is used only to describe the platform it works on.</p>
+  </div>
+
+  <footer>X（推特）垃圾账号清理器 / X (Twitter) Spam Account Cleaner</footer>
+</main>
+</body>
+</html>
