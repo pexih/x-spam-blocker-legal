@@ -1,6 +1,6 @@
-# X（推特）垃圾账号清理器 · 隐私政策 / Privacy Policy
+# 垃圾账号清理器（X / 推特） · 隐私政策 / Privacy Policy
 
-本仓库只存放 [X（推特）垃圾账号清理器](https://github.com/pexih/x-spam-blocker-legal/issues)
+本仓库只存放 [垃圾账号清理器（X / 推特）](https://github.com/pexih/x-spam-blocker-legal/issues)
 Chrome 扩展的隐私政策，由 GitHub Pages 托管为公开页面，供扩展商店审核与用户查阅。
 
 - 中文 / English：[https://pexih.github.io/x-spam-blocker-legal/](https://pexih.github.io/x-spam-blocker-legal/)
