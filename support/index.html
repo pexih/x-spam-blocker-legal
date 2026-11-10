@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>支持开发 · 垃圾账号清理器（X / 推特）</title>
+<title>支持开发 / Support · 垃圾账号清理器（X / 推特）</title>
 <style>
   :root {
     --bg: #ffffff; --fg: #1f2328; --muted: #5b6572;
@@ -22,21 +22,22 @@
     font: 15px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
           "Microsoft YaHei", sans-serif;
   }
-  main { max-width: 760px; margin: 0 auto; }
-  h1 { font-size: 26px; line-height: 1.35; margin: 0 0 6px; letter-spacing: -0.01em; }
-  h2 { font-size: 17px; margin: 34px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); }
+  /* 双语并排后 760px 不够用：两栏各留 44px 内边距，正文每栏约 480px */
+  main { max-width: 1040px; margin: 0 auto; }
+
+  h1 { font-size: 24px; line-height: 1.35; margin: 0 0 6px; letter-spacing: -0.01em; }
+  /* 并排时两栏内容长度不同，h2 的横线会错位，改用留白分隔 */
+  h2 { font-size: 16px; margin: 30px 0 10px; }
   p, li { color: var(--fg); }
-  .sub { color: var(--muted); font-size: 13px; margin: 0 0 24px; }
+  /* 中文单字落单（如末行只剩「益。」）在窄栏里很显眼，交给浏览器重排行 */
+  p { text-wrap: pretty; }
+  h1, h2 { text-wrap: balance; }
+  .sub { color: var(--muted); font-size: 13px; margin: 0 0 22px; }
   .lede {
-    background: var(--chip); border-radius: 10px; padding: 14px 16px; margin: 20px 0 8px;
+    background: var(--chip); border-radius: 10px; padding: 14px 16px; margin: 0 0 8px;
     font-size: 14px;
   }
   a { color: var(--accent); }
-  .en { margin-top: 56px; padding-top: 28px; border-top: 2px solid var(--line); }
-  .en h1 { font-size: 22px; }
-  .en h2:first-of-type { border-top: 0; padding-top: 0; }
-  footer { margin-top: 44px; color: var(--muted); font-size: 12.5px; }
-  footer p { color: var(--muted); margin: 4px 0; }
 
   /* 顶部导航 */
   .nav {
@@ -48,6 +49,13 @@
   .nav a:hover { color: var(--accent); text-decoration: underline; }
   .nav .sep { color: var(--line); }
   .nav .cur { color: var(--fg); font-weight: 600; }
+
+  /* 中文在左、英文在右，同一屏并排。
+     不写 align-items:start —— 让两栏等高，中间那条竖线才会贯穿到底，
+     否则英文栏内容少、竖线半途断掉，看着像渲染错误。 */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; }
+  .col { min-width: 0; padding-right: 44px; }
+  .col + .col { padding-right: 0; padding-left: 44px; border-left: 1px solid var(--line); }
 
   /* 付费区块 */
   .pay { margin: 6px 0 4px; }
@@ -67,77 +75,108 @@
     padding: 6px;
   }
   .qr figcaption { color: var(--muted); font-size: 13px; margin-top: 8px; }
+
+  footer {
+    margin-top: 46px; padding-top: 20px; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 44px;
+    color: var(--muted); font-size: 12.5px;
+  }
+  footer p { color: var(--muted); margin: 4px 0; }
+  .brand { grid-column: 1 / -1; margin-top: 18px; color: var(--muted); font-size: 12.5px; }
+
+  /* 窄屏放不下两栏时退回上下，先中文后英文 */
+  @media (max-width: 880px) {
+    main { max-width: 760px; }
+    .cols { grid-template-columns: 1fr; }
+    .col { padding-right: 0; }
+    .col + .col {
+      padding-left: 0; border-left: 0;
+      margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--line);
+    }
+    footer { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 <main>
   <nav class="nav">
-    <a href="https://chromewebstore.google.com/detail/clacfhkdhdoaccfmncbghipcbmlhfbcb">Chrome 商店</a>
+    <a href="https://chromewebstore.google.com/detail/clacfhkdhdoaccfmncbghipcbmlhfbcb">Chrome 商店 / Store</a>
     <span class="sep">·</span>
-    <a href="../">隐私政策</a>
+    <a href="../">隐私政策 / Privacy</a>
     <span class="sep">·</span>
-    <span class="cur">支持开发</span>
+    <span class="cur">支持开发 / Support</span>
   </nav>
 
-  <h1>支持开发 · 垃圾账号清理器（X / 推特）</h1>
-  <p class="sub">这个扩展完全免费 · 没有付费版</p>
+  <div class="cols">
+    <section class="col" lang="zh-CN">
+      <h1>支持开发</h1>
+      <p class="sub">垃圾账号清理器（X / 推特）· 完全免费，没有付费版</p>
 
-  <p class="lede">
-    <strong>先说清楚：</strong>这里没有付费墙，没有会员，也没有任何功能需要解锁。
-    你付或不付，用起来完全一样。赞赏只是自愿的心意，用来补偿维护它花掉的时间。
-  </p>
+      <p class="lede">
+        <strong>先说清楚：</strong>这里没有付费墙，没有会员，也没有任何功能需要解锁。
+        你付或不付，用起来完全一样。赞赏只是自愿的心意，用来补偿维护它花掉的时间。
+      </p>
 
-  <h2>海外 · Ko-fi</h2>
-  <div class="pay">
-    <a class="btn" href="https://ko-fi.com/zhoutt" target="_blank" rel="noopener noreferrer">在 Ko-fi 上支持</a>
-    <p class="hint">信用卡或 PayPal 付款，可选 3 / 5 / 10 美元，也可以自填金额。一次性赞赏，不是订阅。</p>
-  </div>
+      <h2>海外 · Ko-fi</h2>
+      <div class="pay">
+        <a class="btn" href="https://ko-fi.com/zhoutt" target="_blank" rel="noopener noreferrer">在 Ko-fi 上支持</a>
+        <p class="hint">信用卡或 PayPal 付款，可选 3 / 5 / 10 美元，也可以自填金额。一次性赞赏，不是订阅。</p>
+      </div>
 
-  <h2>国内 · 微信赞赏码</h2>
-  <div class="pay">
-    <figure class="qr">
-      <a href="wechat-qr.jpg" target="_blank" rel="noopener noreferrer">
-        <img src="wechat-qr.jpg" alt="微信赞赏码" width="300" height="300" loading="lazy" />
-      </a>
-      <figcaption>用手机微信扫码，金额自定。扫不出来可以点图片看原图。</figcaption>
-    </figure>
-  </div>
+      <h2>国内 · 微信赞赏码</h2>
+      <div class="pay">
+        <figure class="qr">
+          <a href="wechat-qr.jpg" target="_blank" rel="noopener noreferrer">
+            <img src="wechat-qr.jpg" alt="微信赞赏码" width="300" height="300" loading="lazy" />
+          </a>
+          <figcaption>用手机微信扫码，金额自定。扫不出来可以点图片看原图。</figcaption>
+        </figure>
+      </div>
 
-  <h2>其他方式</h2>
-  <p>反馈问题、提建议、报 bug，都请到
-  <a href="https://github.com/pexih/x-spam-blocker-legal/issues">github.com/pexih/x-spam-blocker-legal/issues</a>。
-  这比赞赏更有用——问题被修掉，所有人都会受益。</p>
+      <h2>其他方式</h2>
+      <p>反馈问题、提建议、报 bug，都请到
+      <a href="https://github.com/pexih/x-spam-blocker-legal/issues">github.com/pexih/x-spam-blocker-legal/issues</a>。
+      这比赞赏更有用——问题被修掉，所有人都会受益。</p>
+    </section>
 
-  <div class="en" lang="en">
-    <h1>Support the project · X (Twitter) Spam Account Cleaner</h1>
-    <p class="sub">The extension is free, with no paid tier</p>
+    <section class="col" lang="en">
+      <h1>Support the project</h1>
+      <p class="sub">X (Twitter) Spam Account Cleaner · Free, with no paid tier</p>
 
-    <p class="lede">
-      <strong>To be clear:</strong> there is no paywall, no membership, and no feature locked
-      behind a payment. Nothing changes whether you support it or not. Tips are voluntary and
-      go towards the time spent maintaining the extension.
-    </p>
+      <p class="lede">
+        <strong>To be clear:</strong> there is no paywall, no membership, and no feature locked
+        behind a payment. Nothing changes whether you support it or not. Tips are voluntary and
+        go towards the time spent maintaining the extension.
+      </p>
 
-    <h2>Ko-fi</h2>
-    <div class="pay">
-      <a class="btn" href="https://ko-fi.com/zhoutt" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a>
-      <p class="hint">Pay by card or PayPal. Suggested amounts are 3, 5 or 10 USD; you can enter
-      your own. One-off tip, not a subscription.</p>
-    </div>
+      <h2>Ko-fi</h2>
+      <div class="pay">
+        <a class="btn" href="https://ko-fi.com/zhoutt" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a>
+        <p class="hint">Pay by card or PayPal. Suggested amounts are 3, 5 or 10 USD; you can enter
+        your own. One-off tip, not a subscription.</p>
+      </div>
 
-    <h2>WeChat (mainland China only)</h2>
-    <p>The QR code above is a WeChat appreciation code. It only works with a WeChat account
-    registered in mainland China, so if you are outside China, please use Ko-fi instead.</p>
+      <h2>WeChat (mainland China only)</h2>
+      <p>The WeChat appreciation code shown here only works with a WeChat account registered in
+      mainland China, so if you are outside China, please use Ko-fi instead.</p>
 
-    <h2>Feedback</h2>
-    <p>Bug reports and suggestions are more valuable than tips: please open an issue at
-    <a href="https://github.com/pexih/x-spam-blocker-legal/issues">github.com/pexih/x-spam-blocker-legal/issues</a>.</p>
+      <h2>Feedback</h2>
+      <p>Bug reports and suggestions are more valuable than tips: please open an issue at
+      <a href="https://github.com/pexih/x-spam-blocker-legal/issues">github.com/pexih/x-spam-blocker-legal/issues</a>.</p>
+    </section>
   </div>
 
   <footer>
-    <p>赞赏为自愿赠与，不支持退款，也不影响扩展的任何功能。</p>
-    <p>款项由开发者本人收取。本页与 Google、Chrome Web Store 及 X Corp. 均无关联，也不是任何平台的支付页面。</p>
-    <p>垃圾账号清理器（X / 推特） / X (Twitter) Spam Account Cleaner</p>
+    <div lang="zh-CN">
+      <p>赞赏为自愿赠与，不支持退款，也不影响扩展的任何功能。</p>
+      <p>款项由开发者本人收取。本页与 Google、Chrome Web Store 及 X Corp. 均无关联，也不是任何平台的支付页面。</p>
+    </div>
+    <div lang="en">
+      <p>Tips are voluntary gifts, non-refundable, and do not affect any feature of the extension.</p>
+      <p>Payments go directly to the developer. This page is not affiliated with Google, the Chrome
+      Web Store, or X Corp., and is not a payment page of any platform.</p>
+    </div>
+    <p class="brand">垃圾账号清理器（X / 推特） / X (Twitter) Spam Account Cleaner</p>
   </footer>
 </main>
 </body>
